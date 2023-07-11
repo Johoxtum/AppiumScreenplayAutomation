@@ -10,9 +10,9 @@
 
 📧 Para cualquier pregunta o consulta relacionada con este proyecto, puedes contactarme a través de los siguientes medios:
 
-- Nombre: [Johoxtum Jiménez]
+- Nombre: Johoxtum Jiménez
 - Correo electrónico: [Johoxtum@gmail.com](mailto:Johoxtum@gmail.com)
-- Teléfono: [3132181506]
+- Teléfono: 3132181506
 - LinkedIn: [Perfil de LinkedIn](https://www.linkedin.com/in/johoxtum-jimenez-463ba1211/)
 
 ## Lenguajes y Frameworks
