@@ -1,0 +1,75 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+group 'org.mobile.testing.demo'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.2.5")
+        classpath("net.serenity-bdd:serenity-single-page-report:3.5.1")
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = "iso-8859-1"
+compileTestJava.options.encoding = "iso-8859-1"
+
+
+ext {
+    serenityCore = '3.3.10'
+    appiumVersion = "8.2.1"
+    Lombok = '1.18.26'
+    assertJVersion = '3.24.2'
+}
+
+dependencies {
+
+    implementation 'org.slf4j:slf4j-simple:2.0.4'
+    implementation "net.serenity-bdd:serenity-core:${serenityCore}"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCore}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityCore}"
+    implementation "net.serenity-bdd:serenity-ensure:${serenityCore}"
+    implementation "org.assertj:assertj-core:${assertJVersion}"
+
+    testImplementation "net.serenity-bdd:serenity-junit:${serenityCore}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityCore}"
+    testImplementation "io.appium:java-client:${appiumVersion}"
+
+    testImplementation 'junit:junit:4.13'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    compileOnly "org.projectlombok:lombok:${Lombok}"
+    annotationProcessor "org.projectlombok:lombok:${Lombok}"
+
+
+}
+gradle.startParameter.continueOnFailure = true
+tasks.withType(JavaCompile) {
+    options.encoding = 'iso-8859-1'
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
